@@ -6,21 +6,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/SpinDry-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/SpinDry-{{ version }}.tar.gz
   sha256: cbd67c9bd84c633b0994c42dd45eca2caf4e601476b99f87dda52eec5605e7e5
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
   run:
     - mchammer
-    - python >=3.6
+    - python >={{ python_min }}
     - scipy
     - matplotlib-base
     - networkx
@@ -33,6 +33,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/andrewtarzia/SpinDry
