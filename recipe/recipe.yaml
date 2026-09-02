@@ -1,0 +1,50 @@
+schema_version: 1
+
+context:
+  name: spindry
+  version: 2026.3.17.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: 446244902eae73934d4b81d8a026860606520012b92a6fefbd7713598acae7e1
+
+build:
+  number: 1
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - pip
+    - setuptools
+  run:
+    - mchammer
+    - python >=${{ python_min }}
+    - scipy
+    - matplotlib-base
+    - networkx
+    - numpy
+
+tests:
+  - python:
+      imports:
+        - spindry
+      pip_check: true
+      python_version:
+        - ${{ python_min }}
+        - "*"
+
+about:
+  summary: Contains MC algorithm for generating host-guest conformers.
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/andrewtarzia/SpinDry
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
