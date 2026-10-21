@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: spindry
-  version: 2026.3.17.0
+  version: 2026.10.21.0
 
 package:
   name: ${{ name|lower }}
@@ -10,10 +10,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
-  sha256: 446244902eae73934d4b81d8a026860606520012b92a6fefbd7713598acae7e1
+  sha256: 298f08310ca31474953a7006f6ba9141a2e2d61dde01ce1fbb4411d9eb090dff
 
 build:
-  number: 1
+  number: 0
   noarch: python
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
@@ -25,11 +25,6 @@ requirements:
   run:
     - mchammer
     - python >=${{ python_min }}
-    - scipy
-    - matplotlib-base
-    - networkx
-    - numpy
-
 tests:
   - python:
       imports:
@@ -37,7 +32,7 @@ tests:
       pip_check: true
       python_version:
         - ${{ python_min }}
-        - "*"
+        - '*'
 
 about:
   summary: Contains MC algorithm for generating host-guest conformers.
